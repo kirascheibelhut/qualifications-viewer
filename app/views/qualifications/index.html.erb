@@ -1,15 +1,31 @@
+<%= link_to "Qualification Viewer", root_path %>
+
 <h1>Qualifications</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Country</th>
-  </tr>
+<!-- Creates array of countries. -->
+<% countries = [] %>
+<% @qualifications.order("name").each do |qualification| %>
+  <% countries.push(qualification.country) %>
+<% end %>
 
-  <% @qualifications.each do |qualification| %>
-  <tr>
-    <td><%= link_to "#{qualification.name}", qualification_path(qualification) %></td>
-    <td><%= qualification.country %></td>
-  </tr>
+<!-- Removes any duplicate values in countries.-->
+<% countries.uniq! %>
+
+<!-- Sorts countries alphabetically with nil last. -->
+<% countries.sort! {|a,b| a && b ? a <=> b : a ? -1 : 1 } %>
+
+<!-- Displays qualifications sorted alphabetically and by country. -->
+<% countries.each do |country| %>
+  <% if country.nil? %>
+    <h3>Other</h3>
+  <% else %>
+    <h3> <%= country %> </h3>
   <% end %>
-</table>
+  <ul>
+  <% @qualifications.order("name").each do |qualification| %>
+    <% if qualification.country == country %>
+      <li><%= link_to "#{qualification.name}", qualification_path(qualification) %></li>
+    <% end %>
+  <% end %>
+  </ul>
+<% end %>
