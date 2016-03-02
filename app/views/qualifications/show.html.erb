@@ -1,16 +1,16 @@
+<%= link_to "Qualification Viewer", root_path %>
+
 <h1><%= @qualification.name %></h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Colour</th>
-  </tr>
-
-  <% @subjects.each do |subject| %>
-  <tr>
-    <td><%= subject.name  %></td>
-    <td><%= subject.colour %></td>
-  </tr>
+<!-- Displays subjects sorted alphabetically with associated colour as background. Displays "Not applicable", if none. -->
+<ul>
+  <% if @subjects.empty? %>
+    <li>Not applicable</li>
+  <% else %>
+    <% @subjects.order("name").each do |subject| %>
+      <li style="background-color: <%= subject.colour %>;"><%= subject.name  %></li>
+    <% end %>
   <% end %>
-</table>
+</ul>
+
 <%= link_to "Back", qualifications_path %>
