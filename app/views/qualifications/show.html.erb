@@ -1,0 +1,16 @@
+<h1><%= @qualification.name %></h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Colour</th>
+  </tr>
+
+  <% @subjects.each do |subject| %>
+  <tr>
+    <td><%= subject.name  %></td>
+    <td><%= subject.colour %></td>
+  </tr>
+  <% end %>
+</table>
+<%= link_to "Back", qualifications_path %>
