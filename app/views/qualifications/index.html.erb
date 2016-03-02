@@ -1,0 +1,15 @@
+<h1>Qualifications</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Country</th>
+  </tr>
+
+  <% @qualifications.each do |qualification| %>
+  <tr>
+    <td><%= link_to "#{qualification.name}", qualification_path(qualification) %></td>
+    <td><%= qualification.country %></td>
+  </tr>
+  <% end %>
+</table>
