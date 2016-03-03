@@ -1,16 +1,32 @@
-<%= link_to "Qualification Viewer", root_path %>
+<div class="header">
+  <div class="container-fluid">
+    <h2><%= link_to "QualificationsViewer", root_path %></h2>
+  </div>
+</div>
 
-<h1><%= @qualification.name %></h1>
+<div class="title">
+  <div class="container">
+    <h2><%= @qualification.name %></h2>
+  </div>
+</div>
 
-<!-- Displays subjects sorted alphabetically with associated colour as background. Displays "Not applicable", if none. -->
-<ul>
-  <% if @subjects.empty? %>
-    <li>Not applicable</li>
-  <% else %>
-    <% @subjects.order("name").each do |subject| %>
-      <li style="background-color: <%= subject.colour %>;"><%= subject.name  %></li>
-    <% end %>
-  <% end %>
-</ul>
+<div class="contents">
+  <div class="container">
+    <!-- Displays subjects sorted alphabetically with associated colour as background. Displays "Not applicable", if none. -->
+    <ul class="subjects">
+      <% if @subjects.empty? %>
+        <li>Not applicable</li>
+      <% else %>
+        <% @subjects.order("name").each do |subject| %>
+          <li style="background-color: <%= subject.colour %>;"><%= subject.name  %></li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+</div>
 
-<%= link_to "Back", qualifications_path %>
+<div class="back-button">
+  <div class="container">
+    <button class="btn"><%= link_to "Back", qualifications_path%></button>
+  </div>
+</div>
