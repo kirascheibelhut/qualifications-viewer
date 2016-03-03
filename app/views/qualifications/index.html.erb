@@ -1,31 +1,45 @@
-<%= link_to "Qualification Viewer", root_path %>
+<div class="header">
+  <div class="container-fluid">
+    <h2><%= link_to "QualificationsViewer", root_path %></h2>
+  </div>
+</div>
 
-<h1>Qualifications</h1>
+<div class="title">
+  <div class="container">
+    <h2>Qualifications</h2>
+  </div>
+</div>
 
-<!-- Creates array of countries. -->
-<% countries = [] %>
-<% @qualifications.order("name").each do |qualification| %>
-  <% countries.push(qualification.country) %>
-<% end %>
-
-<!-- Removes any duplicate values in countries.-->
-<% countries.uniq! %>
-
-<!-- Sorts countries alphabetically with nil last. -->
-<% countries.sort! {|a,b| a && b ? a <=> b : a ? -1 : 1 } %>
-
-<!-- Displays qualifications sorted alphabetically and by country. -->
-<% countries.each do |country| %>
-  <% if country.nil? %>
-    <h3>Other</h3>
-  <% else %>
-    <h3> <%= country %> </h3>
-  <% end %>
-  <ul>
-  <% @qualifications.order("name").each do |qualification| %>
-    <% if qualification.country == country %>
-      <li><%= link_to "#{qualification.name}", qualification_path(qualification) %></li>
+<div class="contents">
+  <div class="container">
+    <!-- Creates array of countries. -->
+    <% countries = [] %>
+    <% @qualifications.order("name").each do |qualification| %>
+      <% countries.push(qualification.country) %>
     <% end %>
-  <% end %>
-  </ul>
-<% end %>
+
+    <!-- Removes any duplicate values in countries.-->
+    <% countries.uniq! %>
+
+    <!-- Sorts countries alphabetically with nil last. -->
+    <% countries.sort! {|a,b| a && b ? a <=> b : a ? -1 : 1 } %>
+    
+    <!-- Displays qualifications sorted alphabetically and by country. -->
+    <% countries.each do |country| %>
+      <div class="col-xs-4">
+        <% if country.nil? %>
+          <h3>Other</h3>
+        <% else %>
+          <h3> <%= country %> </h3>
+        <% end %>
+        <ul class="qualifications">
+	  <% @qualifications.order("name").each do |qualification| %>
+	    <% if qualification.country == country %>
+	      <li><%= link_to "#{qualification.name}", qualification_path(qualification) %></li>
+	    <% end %>
+	  <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+</div>
